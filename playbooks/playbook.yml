@@ -1,0 +1,39 @@
+---
+- name: Install apache 
+  hosts: web
+  become: true
+  tasks:
+    - name: install apache
+      apt:
+        name: apache2
+        state: present
+      when: inventory_hostname in groups['web'] 
+         
+    - name: create web group
+      group:
+        name: web
+        state: present
+
+    - name: create /webdev
+      file:
+        state: directory
+        path: /web
+        group: web
+        mode: 02775
+
+    - name: symlink
+      file:
+        src: /web
+        state: link
+        dest: /var/www/html/web        
+
+    - name: add content to index.html file
+      copy:
+        content: "Hello world"
+        dest: /var/www/html/web     
+
+    - name: update apache
+      apt:
+        name: "*"
+        state: latest
+      when: inventory_hostname in groups['web']       
