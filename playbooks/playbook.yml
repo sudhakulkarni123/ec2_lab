@@ -6,33 +6,17 @@
     - name: update apt_get
       apt:
         update_cache: yes
+
     - name: install apache2
       apt:
         name: "apache2"
         state: present
+
     - name: copy my index page
       copy:
-        src: "index.html"
-        dest: "/var/www/html/index.html"
-    - name: Restart apache2 server
-      service:
-        name: apache2
-        state: restarted---
-- name: Install apache
-  hosts: web
-  become: true
-  tasks:
-    - name: update apt_get
-      apt:
-        update_cache: yes
-    - name: install apache2
-      apt:
-        name: "apache2"
-        state: present
-    - name: copy my index page
-      copy:
-        src: "index.html"
-        dest: "/var/www/html/index.html"
+        src: "index1.html"
+        dest: "/var/www/html/index1.html"
+        
     - name: Restart apache2 server
       service:
         name: apache2
