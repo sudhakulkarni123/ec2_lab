@@ -20,3 +20,29 @@ data "aws_subnet" "public" {
       values =["public"]
     }
 } 
+data "aws_subnet" "private" {
+    filter {
+      name = "tag:Name"
+      values =["private"]
+    }
+} 
+data "aws_subnet" "data" {
+    filter {
+      name = "tag:Name"
+      values =["data"]
+    }
+} 
+
+#data "aws_subnet" "data_a" {
+ #   filter {
+ #     name = "tag:Name"
+ #    values =["data_a"]
+ #   }
+#} 
+
+#data "aws_subnet" "data_b" {
+ #   filter {
+ #     name = "tag:Name"
+ #     values =["data_b"]
+ #   }
+#} 
